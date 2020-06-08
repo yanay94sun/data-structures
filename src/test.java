@@ -1,23 +1,29 @@
 public class test {
     public static void main(String[] args) {
         AVL<String> myAVL = new AVL<String>();
-        AVLNode<String> node1 = new AVLNode<String>(4,"A");
-        AVLNode<String> node2 = new AVLNode<String>(6,"B");
-        AVLNode<String> node3 = new AVLNode<String>(2,"C");
-        myAVL.insert(4,"A");
-        myAVL.insert(6,"B");
-        myAVL.insert(2,"C");
-        myAVL.insert(8,"D");
 
-        myAVL.insert(9,"E");
+        myAVL.insert(10,"A");
+        myAVL.insert(8,"B");
+        myAVL.insert(7,"C");
+        myAVL.insert(5,"D");
 
-        myAVL.insert(10,"F");
+        myAVL.insert(4,"E");
 
-        myAVL.insert(13,"G");
+        myAVL.insert(13,"F");
+
+        myAVL.insert(15,"G");
 
 
 
         System.out.println(myAVL.getRoot());
+        System.out.println(myAVL.getRoot().getLeftChild());
+        System.out.println(myAVL.getRoot().getRightChild());
+        System.out.println(myAVL.getRoot().getRightChild().getFather());
+        System.out.println(myAVL.getRoot().getRightChild().getRightChild());
+        System.out.println(myAVL.getRoot().getRightChild().getLeftChild());
+        System.out.println(myAVL.getRoot().getRightChild().getLeftChild().getFather());
+        System.out.println(myAVL.getRoot().getRightChild().getRightChild().getFather());
+
 
     }
 }
