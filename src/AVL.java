@@ -1,115 +1,141 @@
-import java.io.*;
 import java.util.*;
 
 public class AVL<T> {
 
-	private int height (AVLNode<T> N) {
-		if (N == null)
-			return 0;
-		return N.getHeight();
+	private AVLNode<T> root = null;
+	private int size = 0;
+
+	public AVL (){
+		root = null;
+		size = 0;
 	}
 
 
-
-
-	public void insert(int key, T data) {
-
-		AVLNode<T> node = new AVLNode<T>(key, data);
-		insertRec(node, key);
+	public void insert(int key, T data){
+		root = insert(key, data, root);
 	}
 
-	private AVLNode<T> insertRec(AVLNode<T> node, int key){
-		/* 1.  Perform the normal BST rotation */
-
-
-		if (key < node.key)
-			node.left  = insertRec(node.left, key);
-		else
-			node.right = insertRec(node.right, key);
-
-		/* 2. Update height of this ancestor node */
-		node.height = Math.max(height(node.left), height(node.right)) + 1;
-
-	/* 3. Get the balance factor of this ancestor node to check whether
-	   this node became unbalanced */
-		int balance = getBalance(node);
-
-		// If this node becomes unbalanced, then there are 4 cases
-
-		// Left Left Case
-		if (balance > 1 && key < node.left.key)
-			return rightRotate(node);
-
-		// Right Right Case
-		if (balance < -1 && key > node.right.key)
-			return leftRotate(node);
-
-		// Left Right Case
-		if (balance > 1 && key > node.left.key)
-		{
-			node.left =  leftRotate(node.left);
-			return rightRotate(node);
+	private AVLNode<T> insert (int key, T data, AVLNode<T> node){
+		if (node == null){
+			node = new AVLNode<T> (key, data);
+			size++;
+			return node;
 		}
-
-		// Right Left Case
-		if (balance < -1 && key < node.right.key)
-		{
-			node.right = rightRotate(node.right);
-			return leftRotate(node);
+		else{
+			if (key < node.getKey()){
+				node.setLeftChild (insert (key, data, node.getLeftChild ()));
+				node.getLeftChild().setFather(node);
+				if (height (node.getLeftChild ()) - height (node.getRightChild ()) == 2){
+					if (key < ((node.getLeftChild ()).getKey ()))
+						node = rotateWithLeft (node);
+					else
+						node = doubleWithLeft (node);
+				}
+			}
+			else{
+				if (key > (node.getKey ())){
+					node.setRightChild (insert (key, data, node.getRightChild ()));
+					node.getRightChild().setFather(node);
+					if (height (node.getRightChild ()) - height (node.getLeftChild ()) == 2){
+						if (key > ((node.getRightChild ()).getKey ()))
+							node = rotateWithRight (node);
+						else
+							node = doubleWithRight (node);
+					}
+				}
+			}
 		}
-
-		/* return the (unchanged) node pointer */
+		node.setHeight (max (height (node.getLeftChild ()), height (node.getRightChild ())) + 1);
 		return node;
 	}
 
-	private AVLNode<T> rightRotate(AVLNode<T> y) {
-		AVLNode<T> x = y.left;
-		AVLNode<T> T2 = x.right;
 
-		// Perform rotation
-		x.right = y;
-		y.left = T2;
-
-		// Update heights
-		y.height = Math.max(height(y.left), height(y.right))+1;
-		x.height = Math.max(height(x.left), height(x.right))+1;
-
-		// Return new root
-		return x;
+	public int size (){
+		return size;
 	}
 
-	private AVLNode<T> leftRotate(AVLNode<T> x) {
-		AVLNode<T> y = x.right;
-		AVLNode<T> T2 = y.left;
-
-		// Perform rotation
-		y.left = x;
-		x.right = T2;
-
-		//  Update heights
-		x.height = Math.max(height(x.left), height(x.right))+1;
-		y.height = Math.max(height(y.left), height(y.right))+1;
-
-		// Return new root
-		return y;
+	public int height (){
+		return height (root);
 	}
 
-	// Get Balance factor of node N
-	private int getBalance(AVLNode<T> N) {
-		if (N == null)
-			return 0;
-		return height(N.left) - height(N.right);
+	private int height (AVLNode<T> node){
+		if (node == null)
+			return -1;
+		return node.getHeight ();
+	}
+
+	public boolean isEmpty (){
+		return (size == 0);
+	}
+
+	private AVLNode<T> rotateWithLeft (AVLNode<T> node){
+		AVLNode<T> newNode = node.getLeftChild ();
+		node.setLeftChild (newNode.getRightChild ());
+		newNode.getRightChild().setFather(node);
+		newNode.setRightChild (node);
+		node.setFather(newNode);
+		node.setHeight (max (height (node.getLeftChild ()), height (node.getRightChild ())) + 1);
+		newNode.setHeight (max (height (newNode.getLeftChild ()), node.getHeight ()) + 1);
+		return newNode;
 	}
 
 
-	public T search(int key){
-		//TODO
-		return null;
+	private AVLNode<T> rotateWithRight (AVLNode<T> node){
+		AVLNode<T> newNode = node.getRightChild ();
+		node.setRightChild (newNode.getLeftChild ());
+		newNode.getLeftChild().setFather(node);
+		newNode.setLeftChild (node);
+		node.setFather(newNode);
+		node.setHeight (max (height (node.getLeftChild ()), height (node.getRightChild ())) + 1);
+		newNode.setHeight (max (height (newNode.getRightChild ()), node.getHeight ()) + 1);
+		return newNode;
 	}
+
+	private AVLNode<T> doubleWithLeft (AVLNode<T> node){
+		rotateWithRight (node.getLeftChild ());
+		AVLNode<T> a = rotateWithRight (node.getLeftChild ());
+		node.setLeftChild (a);
+		a.setFather(node);
+
+
+		return rotateWithLeft (node);
+	}
+
+
+	private AVLNode<T> doubleWithRight (AVLNode<T> node){
+		AVLNode<T> a = rotateWithLeft (node.getRightChild ());
+		node.setRightChild (a);
+		a.setFather(node);
+
+		return rotateWithRight (node);
+	}
+
+	public static int max (int first, int second){
+		if (first >= second)
+			return first;
+		else
+			return second;
+	}
+
+	public T search (int key){
+		return search (key, root);
+	}
+
+	private T search (int key, AVLNode<T> node){
+		if (node == null)
+			return null;
+
+		if (key < (node.getKey()))
+			return search (key, node.getLeftChild ());
+
+		if (key > (node.getKey ()))
+			return search (key, node.getRightChild ());
+		return node.getData();
+	}
+
 
 	public AVLNode<T> getRoot(){
-		//TODO
-		return null;
+		return root;
 	}
 }
 
