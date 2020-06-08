@@ -7,8 +7,17 @@ public class test {
         myAVL.insert(4,"A");
         myAVL.insert(6,"B");
         myAVL.insert(2,"C");
+        myAVL.insert(8,"D");
 
-        System.out.println(node3.getFather());
+        myAVL.insert(9,"E");
+
+        myAVL.insert(10,"F");
+
+        myAVL.insert(13,"G");
+
+
+
+        System.out.println(myAVL.getRoot());
 
     }
 }

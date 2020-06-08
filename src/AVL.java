@@ -71,7 +71,6 @@ public class AVL<T> {
 	private AVLNode<T> rotateWithLeft (AVLNode<T> node){
 		AVLNode<T> newNode = node.getLeftChild ();
 		node.setLeftChild (newNode.getRightChild ());
-		newNode.getRightChild().setFather(node);
 		newNode.setRightChild (node);
 		node.setFather(newNode);
 		node.setHeight (max (height (node.getLeftChild ()), height (node.getRightChild ())) + 1);
@@ -83,7 +82,6 @@ public class AVL<T> {
 	private AVLNode<T> rotateWithRight (AVLNode<T> node){
 		AVLNode<T> newNode = node.getRightChild ();
 		node.setRightChild (newNode.getLeftChild ());
-		newNode.getLeftChild().setFather(node);
 		newNode.setLeftChild (node);
 		node.setFather(newNode);
 		node.setHeight (max (height (node.getLeftChild ()), height (node.getRightChild ())) + 1);
