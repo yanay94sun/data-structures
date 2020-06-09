@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class AVL<T> {
+public class AVL<T extends ObjectWithCoordinates<T>> {
 
 	private AVLNode<T> root = null;
 	private int size = 0;
@@ -13,21 +13,23 @@ public class AVL<T> {
 		size = 0;
 	}
 	public void insert(int key, T data){
-		AVLx.insert(, data);
-		AVLy.insert(T.getX() , data);
+		AVLx.insert(data.getX(), data);
+		AVLy.insert(data.getY() , data);
 	}
 
 	public T search(int key){
-		//TODO
-		return null;
+		//NEED TO CHEACK WHAT ARE THEY SEARCHING!!!!!! X OR Y.
+		T x = AVLx.search(key);
+		if (x != null)
+			return x;
+		return AVLy.search(key);
 	}
 
 	public AVLNode<T> getRoot(){
-		//TODO
-		return null;
+		return AVLx.getRoot();
 	}
 }
 
 
-}
+
 
