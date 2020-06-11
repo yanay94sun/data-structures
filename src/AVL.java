@@ -104,7 +104,6 @@ public class AVL<T> {
 	private AVLNode<T> doubleWithRight (AVLNode<T> node){
 		AVLNode<T> a = rotateWithLeft (node.getRightChild ());
 		node.setRightChild (a);
-
 		a.setFather(node);
 
 		return rotateWithRight (node);
