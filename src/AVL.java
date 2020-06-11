@@ -15,7 +15,6 @@ public class AVL<T> {
 
 
 
-
 	public void insert(int key, T data){
 		root = insert(key, data, root);
 	}
@@ -93,7 +92,6 @@ public class AVL<T> {
 	}
 
 	private AVLNode<T> doubleWithLeft (AVLNode<T> node){
-		rotateWithRight (node.getLeftChild ());
 		AVLNode<T> a = rotateWithRight (node.getLeftChild ());
 		node.setLeftChild (a);
 		a.setFather(node);
@@ -106,6 +104,7 @@ public class AVL<T> {
 	private AVLNode<T> doubleWithRight (AVLNode<T> node){
 		AVLNode<T> a = rotateWithLeft (node.getRightChild ());
 		node.setRightChild (a);
+
 		a.setFather(node);
 
 		return rotateWithRight (node);

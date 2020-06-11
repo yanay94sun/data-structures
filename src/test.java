@@ -9,7 +9,6 @@ public class test {
         Point point6 = new Point(15,1);
         Point point7 = new Point(18,33);
 
-
         CordinatesAVL<Point> myAVL = new CordinatesAVL<>();
         myAVL.insert(point1);
         myAVL.insert(point2);
