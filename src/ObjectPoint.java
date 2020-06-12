@@ -1,10 +1,12 @@
-public class Point implements ObjectWithCoordinates{
+public class ObjectPoint implements ObjectWithCoordinates{
     private int x;
     private int y;
+    private String name;
 
-    public Point(int x, int y){
+    public ObjectPoint(int x, int y, String name){
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
     @Override
@@ -15,6 +17,10 @@ public class Point implements ObjectWithCoordinates{
     @Override
     public int getY() {
         return this.y;
+    }
+
+    public String getName() {
+        return this.name;
     }
 
     @Override

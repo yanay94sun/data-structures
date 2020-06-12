@@ -1,9 +1,10 @@
 
 public class StudentSolution  implements MyInterface{
+	CordinatesAVL<ObjectWithCoordinates> cordinatesAVL = new CordinatesAVL<ObjectWithCoordinates>();
 
 	@Override
 	public void insertDataFromDBFile(String objectName, int objectX, int objectY) {
-		// TODO Auto-generated method stub
+		cordinatesAVL.insertCoordinate(new ObjectPoint(objectX, objectY, objectName));
 		
 	}
 	
