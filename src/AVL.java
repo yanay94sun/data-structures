@@ -138,6 +138,44 @@ public class AVL<T> {
 	public AVLNode<T> getRoot(){
 		return root;
 	}
+
+	public ArrayList range(int a, int b){
+		int[] arr = new int [b-a];
+		int counter = 0;
+		ArrayList list = new ArrayList();
+		list = rangeRec(a, b, arr, this.root, counter, list);
+		return list;
+	}
+
+	public ArrayList rangeRec(int a, int b, int[] arr, AVLNode<T> curr, int counter, ArrayList list){
+		if (curr == null)
+			return list;
+		if (curr.getKey() < a)
+			return rangeRec(a, b, arr, curr.getRightChild(), counter, list);
+		if (curr.getKey() > b)
+			return rangeRec(a, b, arr, curr.getLeftChild(), counter, list);
+		if (curr.getKey() == a){
+			arr[counter] = curr.getKey();
+			list.add(curr.getKey());
+			return rangeRec(a, b, arr, curr.getRightChild(), counter += 1, list);
+		}
+		if (curr.getKey() == b) {
+			arr[counter] = curr.getKey();
+			list.add(curr.getKey());
+			return rangeRec(a, b, arr, curr.getLeftChild(), counter += 1, list);
+		}
+		else{
+		arr[counter] = curr.getKey();
+		counter += 1;
+		list.add(curr.getKey());
+//			System.out.println(list);
+		list = rangeRec(a, b, arr, curr.getLeftChild(), counter, list);
+		list = rangeRec(a, b, arr, curr.getRightChild(), counter, list);
+		return list;
+
+		}
+
+	}
 }
 
 
