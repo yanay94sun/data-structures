@@ -139,38 +139,38 @@ public class AVL<T> {
 		return root;
 	}
 
-	public ArrayList range(int a, int b){
-		int[] arr = new int [b-a];
-		int counter = 0;
-		ArrayList list = new ArrayList();
-		list = rangeRec(a, b, arr, this.root, counter, list);
+	public ArrayList<T> range(int a, int b){
+//		int[] arr = new int [b-a];
+//		int counter = 0;
+		ArrayList<T> list = new ArrayList<T>();
+		list = rangeRec(a, b, this.root, list);
 		return list;
 	}
 
-	public ArrayList rangeRec(int a, int b, int[] arr, AVLNode<T> curr, int counter, ArrayList list){
+	public ArrayList<T> rangeRec(int a, int b, AVLNode<T> curr, ArrayList<T> list){
 		if (curr == null)
 			return list;
 		if (curr.getKey() < a)
-			return rangeRec(a, b, arr, curr.getRightChild(), counter, list);
+			return rangeRec(a, b, curr.getRightChild(), list);
 		if (curr.getKey() > b)
-			return rangeRec(a, b, arr, curr.getLeftChild(), counter, list);
+			return rangeRec(a, b, curr.getLeftChild(), list);
 		if (curr.getKey() == a){
-			arr[counter] = curr.getKey();
-			list.add(curr.getKey());
-			return rangeRec(a, b, arr, curr.getRightChild(), counter += 1, list);
+//			arr[counter] = curr.getKey();
+			list.add(curr.getData());
+			return rangeRec(a, b, curr.getRightChild(), list);
 		}
 		if (curr.getKey() == b) {
-			arr[counter] = curr.getKey();
-			list.add(curr.getKey());
-			return rangeRec(a, b, arr, curr.getLeftChild(), counter += 1, list);
+//			arr[counter] = curr.getKey();
+			list.add(curr.getData());
+			return rangeRec(a, b, curr.getLeftChild(), list);
 		}
 		else{
-		arr[counter] = curr.getKey();
-		counter += 1;
-		list.add(curr.getKey());
+//		arr[counter] = curr.getKey();
+//		counter += 1;
+		list.add(curr.getData());
 //			System.out.println(list);
-		list = rangeRec(a, b, arr, curr.getLeftChild(), counter, list);
-		list = rangeRec(a, b, arr, curr.getRightChild(), counter, list);
+		list = rangeRec(a, b, curr.getLeftChild(), list);
+		list = rangeRec(a, b, curr.getRightChild(), list);
 		return list;
 
 		}

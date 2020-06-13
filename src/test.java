@@ -22,8 +22,8 @@ public class test {
         System.out.println(myAVL.getAvlx().getRoot());
         System.out.println(myAVL.getRootY());
 
-        System.out.println(myAVL.getAvlx().range(0, 20));
-        System.out.println(myAVL.getAvly().range(0, 10));
+        System.out.println(myAVL.getAvlx().range(2, 6));
+        System.out.println(myAVL.getAvly().range(3, 5));
 
 
 //        int[] arr1 = myAVL.getAvlx().range(0, 20);
