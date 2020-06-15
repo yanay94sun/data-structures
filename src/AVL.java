@@ -140,8 +140,6 @@ public class AVL<T> {
 	}
 
 	public ArrayList<T> range(int a, int b){
-//		int[] arr = new int [b-a];
-//		int counter = 0;
 		ArrayList<T> list = new ArrayList<T>();
 		list = rangeRec(a, b, this.root, list);
 		return list;
