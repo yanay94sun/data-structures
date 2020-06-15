@@ -240,7 +240,7 @@ public class GUI extends JFrame implements MyInterface{
 	@Override
 	public String[] firstSolution(int leftTopX, int leftTopY, int rightBottomX,
 			int rightBottomY) {
-		return studentSolution.secondSolution(leftTopX, leftTopY, rightBottomX, rightBottomY);
+		return studentSolution.firstSolution(leftTopX, leftTopY, rightBottomX, rightBottomY);
 	}
 
 	@Override

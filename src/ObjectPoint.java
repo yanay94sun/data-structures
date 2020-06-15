@@ -31,7 +31,7 @@ public class ObjectPoint implements ObjectWithCoordinates{
     @Override
     public String toString() {
         return  this.name +
-                " x=" + x +
-                " y=" + y;
+                " X=" + x +
+                " Y=" + y;
     }
 }
