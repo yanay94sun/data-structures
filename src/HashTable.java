@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 public class HashTable {
-	private int size = 11; // NEED TO CHECK WHICH NUMBER REPLACE M???!!!!!!
+	private int size = 11;
 	private LinkedList[] table;
 
 	public HashTable() {
