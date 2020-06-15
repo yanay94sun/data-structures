@@ -153,20 +153,15 @@ public class AVL<T> {
 		if (curr.getKey() > b)
 			return rangeRec(a, b, curr.getLeftChild(), list);
 		if (curr.getKey() == a){
-//			arr[counter] = curr.getKey();
 			list.add(curr.getData());
 			return rangeRec(a, b, curr.getRightChild(), list);
 		}
 		if (curr.getKey() == b) {
-//			arr[counter] = curr.getKey();
 			list.add(curr.getData());
 			return rangeRec(a, b, curr.getLeftChild(), list);
 		}
 		else{
-//		arr[counter] = curr.getKey();
-//		counter += 1;
 		list.add(curr.getData());
-//			System.out.println(list);
 		list = rangeRec(a, b, curr.getLeftChild(), list);
 		list = rangeRec(a, b, curr.getRightChild(), list);
 		return list;
