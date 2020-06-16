@@ -1,4 +1,4 @@
-public class CordinatesAVL<T extends ObjectWithCoordinates> extends AVL<T>{
+public class CordinatesAVL<T extends ObjectWithCoordinates>{
     private AVL<T> Avlx;
     private AVL<T> Avly;
     private AVLNode<T> root = null;
