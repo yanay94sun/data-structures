@@ -20,7 +20,7 @@ public class CoordinatesAVL<T extends ObjectWithCoordinates>{
         return Avly;
     }
 
-    public void insertCoordinate(T data){
+    public void insertCoordinate(T data){ // insert both AVL'S
         getAvlx().insert(data.getX(), data);
         getAvly().insert(data.getY(), data);
 
