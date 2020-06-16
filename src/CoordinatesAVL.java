@@ -1,10 +1,10 @@
-public class CordinatesAVL<T extends ObjectWithCoordinates>{
+public class CoordinatesAVL<T extends ObjectWithCoordinates>{
     private AVL<T> Avlx;
     private AVL<T> Avly;
     private AVLNode<T> root = null;
     private int size = 0;
 
-    public CordinatesAVL(){
+    public CoordinatesAVL(){
         this.Avlx = new AVL<>();
         this.Avly = new AVL<>();
         root = null;

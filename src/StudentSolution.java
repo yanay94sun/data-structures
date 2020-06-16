@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
 public class StudentSolution  implements MyInterface{
-	CordinatesAVL<ObjectWithCoordinates> cordinatesAVL = new CordinatesAVL<>();
+	CoordinatesAVL<ObjectWithCoordinates> coordinatesAVL = new CoordinatesAVL<>();
 
 	@Override
 	public void insertDataFromDBFile(String objectName, int objectX, int objectY) {
-		cordinatesAVL.insertCoordinate(new ObjectPoint(objectX, objectY, objectName));
+		coordinatesAVL.insertCoordinate(new ObjectPoint(objectX, objectY, objectName));
 		
 	}
 	
 	@Override
 	public String[] firstSolution(int leftTopX, int leftTopY, int rightBottomX, int rightBottomY) {
 		ArrayList<String > resList = new ArrayList<>();
-		ArrayList<ObjectWithCoordinates> listX =cordinatesAVL.getAvlx().range(leftTopX, rightBottomX);
-		ArrayList<ObjectWithCoordinates> listY =cordinatesAVL.getAvly().range(leftTopY, rightBottomY);
+		ArrayList<ObjectWithCoordinates> listX = coordinatesAVL.getAvlx().range(leftTopX, rightBottomX);
+		ArrayList<ObjectWithCoordinates> listY = coordinatesAVL.getAvly().range(leftTopY, rightBottomY);
 		HashTable hashTable = new HashTable();
 		for (ObjectWithCoordinates x : listX) {
 			hashTable.insert(x);
@@ -39,8 +39,8 @@ public class StudentSolution  implements MyInterface{
 	@Override
 	public String[] secondSolution(int leftTopX, int leftTopY,
 			int rightBottomX, int rightBottomY) {
-		ArrayList<ObjectWithCoordinates> listX =cordinatesAVL.getAvlx().range(leftTopX, rightBottomX);
-		ArrayList<ObjectWithCoordinates> listY =cordinatesAVL.getAvly().range(leftTopY, rightBottomY);
+		ArrayList<ObjectWithCoordinates> listX = coordinatesAVL.getAvlx().range(leftTopX, rightBottomX);
+		ArrayList<ObjectWithCoordinates> listY = coordinatesAVL.getAvly().range(leftTopY, rightBottomY);
 		ArrayList<String > resList = new ArrayList<>();
 		if (listX.size() <= listY.size()){
 			for (ObjectWithCoordinates object : listX){
